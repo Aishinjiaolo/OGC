@@ -1,4 +1,7 @@
+#include <iostream>
 #include <string>
+#include <vector>
+
 using namespace std;
 
 class Point {
@@ -18,7 +21,10 @@ class Point {
 class PointArray {
     public:
         void append(Point point);
+        Point get_point(int index);
+        int size();
 
     private:
-        Point *_array;
+        int _size;
+        vector<Point> _array;
 };

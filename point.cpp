@@ -1,9 +1,15 @@
-#include <iostream>
 #include "point.h"
 
-using namespace std;
+int PointArray::size() {
+    return _array.size();
+}
+
+Point PointArray::get_point(int index) {
+    return _array[index];
+}
 
 void PointArray::append(Point point) {
+    _array.push_back(point);
 }
 
 void Point::get_center_point(Point point1 , Point point2) {
@@ -33,6 +39,18 @@ int main() {
 
     cout << "center x, y = " << point3.get_point_x() << ", "
         << point3.get_point_y() << endl;
-    
+
+    PointArray array;
+    array.append(point1);
+    array.append(point2);
+    array.append(point3);
+
+    cout << "array = " << endl;
+    int i = 0;
+    for (i = 0; i < array.size(); i++) {
+        cout << array.get_point(i).get_point_x() << "\t"
+            << array.get_point(i).get_point_y() << endl;
+    }
+
     return 0;
 }
