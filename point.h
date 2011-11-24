@@ -29,7 +29,7 @@ class Points {
         int size();
 
     private:
-        vector<Point> _array;
+        vector<Point> _points;
 };
 
 bool sort_by_gx_descending(Point a, Point b) {return a.get_gx() > b.get_gx();}

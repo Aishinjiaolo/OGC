@@ -1,11 +1,11 @@
 #include "point.h"
 
 void Points::sort_by_y() {
-    sort(_array.begin(), _array.end(), sort_by_gy_descending);
+    sort(_points.begin(), _points.end(), sort_by_gy_descending);
 }
 
 void Points::sort_by_x() {
-    sort(_array.begin(), _array.end(), sort_by_gx_descending);
+    sort(_points.begin(), _points.end(), sort_by_gx_descending);
 }
 
 void Points::parse_1d_array_from(vector<double> point_1d_array) {
@@ -18,15 +18,15 @@ void Points::parse_1d_array_from(vector<double> point_1d_array) {
 }
 
 int Points::size() {
-    return _array.size();
+    return _points.size();
 }
 
 Point Points::get_point(int index) {
-    return _array[index];
+    return _points[index];
 }
 
 void Points::append(Point point) {
-    _array.push_back(point);
+    _points.push_back(point);
 }
 
 void Point::get_center_of(Point point1 , Point point2) {
