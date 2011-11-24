@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -21,9 +22,15 @@ class Points {
     public:
         void append(Point point);
         void parse_1d_array_from(vector<double> point_1d_array);
+        void sort_by_x();
+        void sort_by_y();
+
         Point get_point(int index);
         int size();
 
     private:
         vector<Point> _array;
 };
+
+bool sort_by_gx_descending(Point a, Point b) {return a.get_gx() > b.get_gx();}
+bool sort_by_gy_descending(Point a, Point b) {return a.get_gy() > b.get_gy();}

@@ -1,5 +1,13 @@
 #include "point.h"
 
+void Points::sort_by_y() {
+    sort(_array.begin(), _array.end(), sort_by_gy_descending);
+}
+
+void Points::sort_by_x() {
+    sort(_array.begin(), _array.end(), sort_by_gx_descending);
+}
+
 void Points::parse_1d_array_from(vector<double> point_1d_array) {
     for (unsigned int i = 0; i < 0.5 * point_1d_array.size(); i++) {
         Point point;
@@ -45,7 +53,9 @@ int main() {
 
     Points main_points;
     main_points.parse_1d_array_from(main_1d_points);
-
+    main_points.sort_by_x();
+    main_points.sort_by_y();
+    
     for (int i = 0; i < main_points.size(); i++) {
         cout << main_points.get_point(i).get_gx() << "\t"
             << main_points.get_point(i).get_gy() << endl;
