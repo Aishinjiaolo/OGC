@@ -1,0 +1,14 @@
+This is for segment based geometry learning.
+It will keep updating.
+
+Currently containing: point.cpp point.h
+
+Please compile by g++:
+
+     ./g++ -Wall -o point point.cpp
+
+and run:
+
+     ./point
+
+for test data print out
