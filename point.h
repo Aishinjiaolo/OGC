@@ -6,25 +6,24 @@ using namespace std;
 
 class Point {
     public:
+        double get_gx();
+        double get_gy();
+        
         void set_point(double gx, double gy);
-        
-        double get_point_x();
-        double get_point_y();
-        
-        void get_center_point(Point point1, Point point2);
+        void get_center_of(Point point1, Point point2);
 
     private:
         double _gx;
         double _gy;
 };
 
-class PointArray {
+class Points {
     public:
         void append(Point point);
+        void parse_1d_array_from(vector<double> point_1d_array);
         Point get_point(int index);
         int size();
 
     private:
-        int _size;
         vector<Point> _array;
 };

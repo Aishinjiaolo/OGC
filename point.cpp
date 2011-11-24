@@ -1,18 +1,27 @@
 #include "point.h"
 
-int PointArray::size() {
+void Points::parse_1d_array_from(vector<double> point_1d_array) {
+    for (unsigned int i = 0; i < 0.5 * point_1d_array.size(); i++) {
+        Point point;
+        unsigned int index = i * 2;
+        point.set_point(point_1d_array[index], point_1d_array[index+1]);
+        Points::append(point);
+    }
+}
+
+int Points::size() {
     return _array.size();
 }
 
-Point PointArray::get_point(int index) {
+Point Points::get_point(int index) {
     return _array[index];
 }
 
-void PointArray::append(Point point) {
+void Points::append(Point point) {
     _array.push_back(point);
 }
 
-void Point::get_center_point(Point point1 , Point point2) {
+void Point::get_center_of(Point point1 , Point point2) {
     _gx = 0.5 * (point1._gx + point2._gx);
     _gy = 0.5 * (point1._gy + point2._gy);
 }
@@ -22,34 +31,24 @@ void Point::set_point(double gx, double gy) {
     _gy = gy;
 }
 
-double Point::get_point_x() {
+double Point::get_gx() {
     return _gx;
 }
 
-double Point::get_point_y() {
+double Point::get_gy() {
     return _gy;
 }
 
 int main() {
-    Point point1, point2, point3;
-    point1.set_point(10, 20);
-    point2.set_point(10, 40);
+    double main_1d_array[] = {5, 5, 0, 5, 10, 15, 20, 25, 25, 5, 10, 0};
+    vector<double> main_1d_points(main_1d_array, main_1d_array + 12);
 
-    point3.get_center_point(point1, point2);
+    Points main_points;
+    main_points.parse_1d_array_from(main_1d_points);
 
-    cout << "center x, y = " << point3.get_point_x() << ", "
-        << point3.get_point_y() << endl;
-
-    PointArray array;
-    array.append(point1);
-    array.append(point2);
-    array.append(point3);
-
-    cout << "array = " << endl;
-    int i = 0;
-    for (i = 0; i < array.size(); i++) {
-        cout << array.get_point(i).get_point_x() << "\t"
-            << array.get_point(i).get_point_y() << endl;
+    for (int i = 0; i < main_points.size(); i++) {
+        cout << main_points.get_point(i).get_gx() << "\t"
+            << main_points.get_point(i).get_gy() << endl;
     }
 
     return 0;
