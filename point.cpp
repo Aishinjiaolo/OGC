@@ -1,5 +1,17 @@
 #include "point.h"
 
+bool sort_by_gx_descending(Point a, Point b) {
+    if (a.get_gx() > b.get_gx()) return true;
+    if (a.get_gx() == b.get_gx() && a.get_gy() > b.get_gy()) return true;
+    return false;
+}
+
+bool sort_by_gy_descending(Point a, Point b) {
+    if (a.get_gy() > b.get_gy()) return true;
+    if (a.get_gy() == b.get_gy() && a.get_gx() > b.get_gx()) return true;
+    return false;
+}
+
 void Points::sort_by_y() {
     sort(_points.begin(), _points.end(), sort_by_gy_descending);
 }
@@ -48,18 +60,31 @@ double Point::get_gy() {
 }
 
 int main() {
-    double main_1d_array[] = {5, 5, 0, 5, 10, 15, 20, 25, 25, 5, 10, 0};
-    vector<double> main_1d_points(main_1d_array, main_1d_array + 12);
+    struct timeval start, end;
+    gettimeofday(&start, NULL);
+   
+    const int max = 100;
+    double main_1d_array[max];
+    srand(time(NULL));
+
+    for (int i = 0; i < max; i++) {
+        main_1d_array[i] = rand() % 100;
+    };
+
+    vector<double> main_1d_points(main_1d_array, main_1d_array + max);
 
     Points main_points;
     main_points.parse_1d_array_from(main_1d_points);
-    main_points.sort_by_x();
     main_points.sort_by_y();
     
     for (int i = 0; i < main_points.size(); i++) {
         cout << main_points.get_point(i).get_gx() << "\t"
             << main_points.get_point(i).get_gy() << endl;
     }
-
+    
+    gettimeofday(&end, NULL);
+    cout << "Time elapsed " <<
+        end.tv_usec - start.tv_usec << " usec" << endl;
+    
     return 0;
 }

@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <sys/time.h>
 
 using namespace std;
 
@@ -32,5 +33,4 @@ class Points {
         vector<Point> _points;
 };
 
-bool sort_by_gx_descending(Point a, Point b) {return a.get_gx() > b.get_gx();}
-bool sort_by_gy_descending(Point a, Point b) {return a.get_gy() > b.get_gy();}
+
