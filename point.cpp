@@ -1,5 +1,15 @@
 #include "point.h"
 
+void Profiler::end() {
+    gettimeofday(&_end, NULL);
+    cout << "Time elapsed " <<
+        _end.tv_usec - _start.tv_usec << " usec" << endl;
+}
+
+void Profiler::start() {
+    gettimeofday(&_start, NULL);
+}
+
 bool sort_by_gx_descending(Point a, Point b) {
     if (a.get_gx() > b.get_gx()) return true;
     if (a.get_gx() == b.get_gx() && a.get_gy() > b.get_gy()) return true;
@@ -60,9 +70,9 @@ double Point::get_gy() {
 }
 
 int main() {
-    struct timeval start, end;
-    gettimeofday(&start, NULL);
-   
+    Profiler profiler;
+    profiler.start();
+
     const int max = 100;
     double main_1d_array[max];
     srand(time(NULL));
@@ -82,9 +92,7 @@ int main() {
             << main_points.get_point(i).get_gy() << endl;
     }
     
-    gettimeofday(&end, NULL);
-    cout << "Time elapsed " <<
-        end.tv_usec - start.tv_usec << " usec" << endl;
+    profiler.end();
     
     return 0;
 }

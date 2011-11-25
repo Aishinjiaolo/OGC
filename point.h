@@ -6,6 +6,15 @@
 
 using namespace std;
 
+class Profiler {
+    public:
+        void start();
+        void end();
+
+    private:
+        struct timeval _start, _end;
+};
+
 class Point {
     public:
         double get_gx();
