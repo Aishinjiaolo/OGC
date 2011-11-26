@@ -5,8 +5,13 @@ Currently containing:
   point.cpp point.h => API 'point'
   main.cpp          => usage flow
 
-Make:
+Make all:
   ./make
+
+Make library only:
+  ./make lib
+
+Run:
   ./run
 
 Clean:
