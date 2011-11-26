@@ -1,14 +1,14 @@
 This is for segment based geometry learning.
 It will keep updating.
 
-Currently containing: point.cpp point.h
+Currently containing: 
+  point.cpp point.h => API 'point'
+  main.cpp          => usage flow
 
-Please compile by g++:
+Make:
+  ./make
+  ./run
 
-     ./g++ -Wall -o point point.cpp
+Clean:
+  ./make clean
 
-and run:
-
-     ./point
-
-for test data print out
