@@ -1,11 +1,20 @@
-all: main.cpp libpoint.so
-	g++ -Wall -o run main.cpp libpoint.so
+++      = g++
+VERSION = 0.0.1
+SRC     = point.cpp
+OBJS    = $(SRC:.cpp=.o)
+LINK    = lib_$(VERSION).so
+LIB     = lib-$(VERSION).so
+SO      = lib.so.$(VERSION)
+RUN     = run
 
-libpoint.so: point.cpp
-	g++ -c -fPIC point.cpp
-	g++ -shared -WI, -soname,libpoint.so.1 -o libpoint.so1 point.o
-	ln -s -f libpoint.so1 libpoint.so
+all: main.cpp $(LINK)
+	$(++) -Wall -o $(RUN) main.cpp $(LINK)
+
+$(LINK): $(SRC)
+	$(++) -c -fPIC point.cpp
+	$(++) -shared -WI, -soname,$(SO) -o $(LIB) $(OBJS)
+	ln -s -f $(LIB) $(LINK)
 
 clean:
-	rm -f *.so *.o *.so* run
+	rm -f *.so *.o $(RUN)
 
