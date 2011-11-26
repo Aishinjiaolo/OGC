@@ -34,7 +34,8 @@ class Points {
         void parse_1d_points_from(vector<double> points_1d);
         void sort_by_x();
         void sort_by_y();
-
+        void create_center_from(Points potins);
+        
         Point get_point(int index);
         int size();
 

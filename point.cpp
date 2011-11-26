@@ -30,6 +30,22 @@ void Points::sort_by_x() {
     sort(_points.begin(), _points.end(), sort_by_gx_descending);
 }
 
+void Points::create_center_from(Points points) {
+    int size = points.size();
+    for (int i = 0; i < size; i++) {
+        Point current = points.get_point(i);
+
+        for (int j = i + 1; j < size; j++) {
+            Point context = points.get_point(j);
+
+            Point center;
+            center.get_center_of(current, context);
+            
+            Points::append(center);
+        }
+    }
+}
+
 void Points::parse_1d_points_from(vector<double> points_1d) {
     for (unsigned int i = 0; i < 0.5 * points_1d.size(); i++) {
         Point point;
@@ -93,7 +109,15 @@ int main() {
         cout << main_points.get_point(i).get_gx() << "\t"
             << main_points.get_point(i).get_gy() << endl;
     }
-    
+
+    Points center;
+    center.create_center_from(main_points);
+
+    for (int i = 0; i < center.size(); i++) {
+        cout << center.get_point(i).get_gx() << "\t"
+            << center.get_point(i).get_gy() << endl;
+    }
+
     profiler.end();
     
     return 0;
