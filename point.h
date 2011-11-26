@@ -31,7 +31,7 @@ class Point {
 class Points {
     public:
         void append(Point point);
-        void parse_1d_array_from(vector<double> point_1d_array);
+        void parse_1d_points_from(vector<double> points_1d);
         void sort_by_x();
         void sort_by_y();
 

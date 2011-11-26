@@ -30,11 +30,11 @@ void Points::sort_by_x() {
     sort(_points.begin(), _points.end(), sort_by_gx_descending);
 }
 
-void Points::parse_1d_array_from(vector<double> point_1d_array) {
-    for (unsigned int i = 0; i < 0.5 * point_1d_array.size(); i++) {
+void Points::parse_1d_points_from(vector<double> points_1d) {
+    for (unsigned int i = 0; i < 0.5 * points_1d.size(); i++) {
         Point point;
         unsigned int index = i * 2;
-        point.set_point(point_1d_array[index], point_1d_array[index+1]);
+        point.set_point(points_1d[index], points_1d[index+1]);
         Points::append(point);
     }
 }
@@ -70,21 +70,23 @@ double Point::get_gy() {
 }
 
 int main() {
+    // profiler
     Profiler profiler;
     profiler.start();
 
+    // random generate 1d vector
+    // assign maximum size =>
     const int max = 100;
-    double main_1d_array[max];
+    vector<double> main_1d_points(max);
+    
     srand(time(NULL));
-
     for (int i = 0; i < max; i++) {
-        main_1d_array[i] = rand() % 100;
+        main_1d_points[i] = rand() % 100;
     };
 
-    vector<double> main_1d_points(main_1d_array, main_1d_array + max);
-
+    // transform to Points, then sorting
     Points main_points;
-    main_points.parse_1d_array_from(main_1d_points);
+    main_points.parse_1d_points_from(main_1d_points);
     main_points.sort_by_y();
     
     for (int i = 0; i < main_points.size(); i++) {
