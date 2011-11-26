@@ -12,7 +12,7 @@ all: $(FLOW) $(LINK)
 	$(++) -Wall -o $(RUN) $(FLOW) $(LINK)
 
 $(LINK): $(SRC)
-	$(++) -c -fPIC $(SRC)
+	$(++) -c -fPIC -Wall $(SRC)
 	$(++) -shared -WI, -soname,$(SO) -o $(LIB) $(OBJS)
 	ln -s -f $(LIB) $(LINK)
 
