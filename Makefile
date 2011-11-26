@@ -1,7 +1,7 @@
 ++      = g++
 VERSION = 0.0.1
 FLOW    = main.cpp
-SRC     = point.cpp
+SRC     = point.cpp segment.cpp polygon.cpp
 OBJS    = $(SRC:.cpp=.o)
 LINK    = lib_$(VERSION).so
 LIB     = lib-$(VERSION).so
