@@ -1,4 +1,4 @@
-#include "point.h"
+#include "polygon.h"
 
 int main() {
     // profiler
