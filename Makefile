@@ -1,5 +1,6 @@
 ++      = g++
 VERSION = 0.0.1
+FLOW    = main.cpp
 SRC     = point.cpp
 OBJS    = $(SRC:.cpp=.o)
 LINK    = lib_$(VERSION).so
@@ -7,14 +8,16 @@ LIB     = lib-$(VERSION).so
 SO      = lib.so.$(VERSION)
 RUN     = run
 
-all: main.cpp $(LINK)
-	$(++) -Wall -o $(RUN) main.cpp $(LINK)
+all: $(FLOW) $(LINK)
+	$(++) -Wall -o $(RUN) $(FLOW) $(LINK)
 
 $(LINK): $(SRC)
-	$(++) -c -fPIC point.cpp
+	$(++) -c -fPIC $(SRC)
 	$(++) -shared -WI, -soname,$(SO) -o $(LIB) $(OBJS)
 	ln -s -f $(LIB) $(LINK)
 
+lib: $(LINK)
+
 clean:
-	rm -f *.so *.o $(RUN)
+	rm -f $(OBJS) $(LINK) $(LIB) $(RUN)
 
