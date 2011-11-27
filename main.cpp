@@ -33,6 +33,22 @@ int main() {
             << center.get_point(i).get_gy() << endl;
     }
 
+    Point a, b;
+    a.set_point(0, 0);
+    b.set_point(0, 0);
+    
+    Segment c;
+    c.set_segment(a, b);
+    
+    cout << "head = " << c.get_head().get_gx() << ", "
+        << c.get_head().get_gy() << endl;
+    cout << "tail = " << c.get_tail().get_gx() << ", "
+        << c.get_tail().get_gy() << endl;
+    
+    cout << "length = " << c.get_length() << endl;
+    cout << "angle = " << c.get_angle() << endl;
+    cout << "dir = " << c.get_dir() << endl;
+    
     profiler.end();
     
     return 0;

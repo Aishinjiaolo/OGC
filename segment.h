@@ -1,3 +1,4 @@
+#include <cmath>
 #include "point.h"
 
 class Segment {
@@ -8,7 +9,7 @@ class Segment {
         Point  get_tail();
         int    get_dir();
         double get_length();
-        double get_angle;
+        double get_angle();
 
     private:
         Point  _head;
