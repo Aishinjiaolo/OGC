@@ -2,7 +2,7 @@
 
 class Polygon {
     public:
-        void set_polygon(Segments segments);
+        void set_polygon(Segments *segments);
         
         Point  get_center();
         double get_area();
@@ -15,13 +15,12 @@ class Polygon {
 
 class Polygons {
     public:
-        void append(Polygon polygon);
+        void append(Polygon *polygon);
         void sort();
 
         Polygon get_polygon(int index);
         int size();
 
     private:
-        // each polygon is uncertain in size?
-        vector<Polygon> _polygons;
+        vector<Polygon*> _polygons;
 };
