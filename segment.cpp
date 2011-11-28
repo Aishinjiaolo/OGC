@@ -1,10 +1,10 @@
 #include "segment.h"
 
-Point Segment::get_head() {
+Point *Segment::get_head() {
     return _head; 
 }
 
-Point Segment::get_tail() {
+Point *Segment::get_tail() {
     return _tail;
 }
 
@@ -20,12 +20,12 @@ double Segment::get_angle() {
     return _angle;
 }
 
-void Segment::set_segment(Point head, Point tail) {
+void Segment::set_segment(Point *head, Point *tail) {
     _head = head;
     _tail = tail;
     
-    double bias_x = tail.get_gx() - head.get_gx();
-    double bias_y = tail.get_gy() - head.get_gy();
+    double bias_x = tail->get_gx() - head->get_gx();
+    double bias_y = tail->get_gy() - head->get_gy();
     _length = sqrt(pow(bias_x, 2) + pow(bias_y, 2));
     _angle = atan(bias_y / bias_x) * 180 / M_PI;
     if (bias_x < 0) _angle += 180;

@@ -35,15 +35,15 @@ int main() {
 
     Point a, b;
     a.set_point(0, 0);
-    b.set_point(0, 0);
+    b.set_point(0, 5);
     
     Segment c;
-    c.set_segment(a, b);
-    
-    cout << "head = " << c.get_head().get_gx() << ", "
-        << c.get_head().get_gy() << endl;
-    cout << "tail = " << c.get_tail().get_gx() << ", "
-        << c.get_tail().get_gy() << endl;
+    c.set_segment(&a, &b);
+
+    cout << "head = " << c.get_head()->get_gx() << ", "
+        << c.get_head()->get_gy() << endl;
+    cout << "tail = " << c.get_tail()->get_gx() << ", "
+        << c.get_tail()->get_gy() << endl;
     
     cout << "length = " << c.get_length() << endl;
     cout << "angle = " << c.get_angle() << endl;
