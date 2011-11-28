@@ -22,11 +22,12 @@ class Segment {
 class Segments {
     public:
         void append(Segment *segment);
-        void sort();
+        void sort_by_x();
+        void sort_by_y();
         
-        Segment get_segment(int index);
+        Segment *get_segment(int index);
         int size();
 
     private:
-        vector<Segment> *_segments;
+        vector<Segment*> _segments;
 };

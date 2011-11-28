@@ -1,5 +1,17 @@
 #include "segment.h"
 
+int Segments::size() {
+    return _segments.size();
+}
+
+void Segments::append(Segment *segment) {
+    _segments.push_back(segment);
+}
+
+Segment *Segments::get_segment(int index) {
+    return _segments[index];
+}
+
 Point *Segment::get_head() {
     return _head; 
 }

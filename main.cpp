@@ -33,22 +33,45 @@ int main() {
             << center.get_point(i).get_gy() << endl;
     }
 
-    Point a, b;
-    a.set_point(0, 0);
-    b.set_point(0, 5);
+    Point a, b, c, d, e, f, g, h;
+    a.set_point( 0,  0);
+    b.set_point( 5,  0);
+    c.set_point( 5,  5);
+    d.set_point( 0,  5);
+    e.set_point(-5,  5);
+    f.set_point(-5,  0);
+    g.set_point(-5, -5);
+    h.set_point( 0, -5);
     
-    Segment c;
-    c.set_segment(&a, &b);
+    Segment ab, bc, cd, de, ef, fg, gh, ha;
+    ab.set_segment(&a, &b);
+    bc.set_segment(&b, &c);
+    cd.set_segment(&c, &d);
+    de.set_segment(&d, &e);
+    ef.set_segment(&e, &f);
+    fg.set_segment(&f, &g);
+    gh.set_segment(&g, &h);
+    ha.set_segment(&h, &a);
 
-    cout << "head = " << c.get_head()->get_gx() << ", "
-        << c.get_head()->get_gy() << endl;
-    cout << "tail = " << c.get_tail()->get_gx() << ", "
-        << c.get_tail()->get_gy() << endl;
-    
-    cout << "length = " << c.get_length() << endl;
-    cout << "angle = " << c.get_angle() << endl;
-    cout << "dir = " << c.get_dir() << endl;
-    
+    Segments all;
+    all.append(&ab);
+    all.append(&bc);
+    all.append(&cd);
+    all.append(&de);
+    all.append(&ef);
+    all.append(&fg);
+    all.append(&gh);
+    all.append(&ha);
+
+    for (int i = 0; i < all.size(); i++) {
+        cout << "segment " << i << ": "
+            << all.get_segment(i)->get_head()->get_gx() << ", "
+            << all.get_segment(i)->get_head()->get_gy() << endl;
+        cout << "           "
+            << all.get_segment(i)->get_tail()->get_gx() << ", "
+            << all.get_segment(i)->get_tail()->get_gy() << endl;
+    }
+
     profiler.end();
     
     return 0;
