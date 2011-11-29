@@ -72,7 +72,32 @@ int main() {
             << all.get_segment(i)->get_tail()->get_gy() << endl;
     }
 
+    for (int i = 0; i < all.size(); i++) {
+        double tail_x = all.get_segment(i)->get_tail()->get_gx();
+        double tail_y = all.get_segment(i)->get_tail()->get_gy();
+        if (tail_x == tail_y) {
+            double new_tail_x = tail_x >= 0 ? tail_x + 1 : tail_x - 1;
+            double new_tail_y = new_tail_x;
+
+            Point new_tail;
+            new_tail.set_point(new_tail_x, new_tail_y);
+
+            // doest not work as expected
+            all.get_segment(i)->set_segment(all.get_segment(i)->get_head(),
+                    &new_tail);
+        }
+    }
+
+    for (int i = 0; i < all.size(); i++) {
+        cout << "segment " << i << ": "
+            << all.get_segment(i)->get_head()->get_gx() << ", "
+            << all.get_segment(i)->get_head()->get_gy() << endl;
+        cout << "           "
+            << all.get_segment(i)->get_tail()->get_gx() << ", "
+            << all.get_segment(i)->get_tail()->get_gy() << endl;
+    }
+
     profiler.end();
-    
+
     return 0;
 }
