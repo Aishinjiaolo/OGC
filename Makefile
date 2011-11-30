@@ -12,7 +12,6 @@ SO      = lib.so.$(VERSION)
 RUN     = run
 
 TEST_DIR = $(CURD)/test
-TEST     = unittest
 
 all: $(FLOW) $(LINK)
 	$(++) -Wall -I$(SRC_DIR) -o $(RUN) $(FLOW) $(LINK)
