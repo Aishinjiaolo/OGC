@@ -1,8 +1,10 @@
+# setting
 ++      = g++
 VERSION = 0.0.1
 CURD    = .
 FLOW    = $(CURD)/main.cpp
 
+# my source / library
 SRC_DIR = $(CURD)/src
 SRC     = point.cpp segment.cpp polygon.cpp
 OBJS    = $(SRC:.cpp=.o)
@@ -11,16 +13,21 @@ LIB     = lib-$(VERSION).so
 SO      = lib.so.$(VERSION)
 RUN     = run
 
+# my unit test
 UNITTESTS = unittest
-GTEST_DIR = /Users/ktlo/work/gtest/gtest-1.6.0
 TEST_DIR  = $(CURD)/test
+TEST_SRCS = point_unittest.cc segment_unittest.cc
+TEST_OBJS = $(TEST_SRCS:.cc=.o)
+
+# gtest framework
+GTEST_DIR = /Users/ktlo/work/gtest/gtest-1.6.0
 CPPFLAGS += -I$(GTEST_DIR)/include
 CXXFLAGS += -g -Wall -Wextra
 
 GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
                 $(GTEST_DIR)/include/gtest/internal/*.h
+GTEST_SRCS_   = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
 
-GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
 
 all: $(FLOW) $(LINK)
 	$(++) -Wall -I$(SRC_DIR) -o $(RUN) $(FLOW) $(LINK)
@@ -34,6 +41,7 @@ lib: $(LINK)
 
 clean:
 	rm -f $(OBJS) $(LINK) $(LIB) $(RUN)
+
 
 gtest: $(UNITTESTS)
 
@@ -54,12 +62,11 @@ gtest.a: gtest-all.o
 gtest_main.a: gtest-all.o gtest_main.o
 	$(AR) $(ARFLAGS) $@ $^
 
-point.o: $(SRC_DIR)/point.cpp $(SRC_DIR)/point.h $(GTEST_HEADERS)
-	$(++) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/point.cpp
+$(OBJS): $(SRC_DIR)/*.cpp $(SRC_DIR)/*.h $(GTEST_HEADERS)
+	$(++) $(CPPFLAGS) $(CXXFLAGS) -c $(SRC_DIR)/*.cpp
 
-point_unittest.o: $(TEST_DIR)/point_unittest.cc \
-                     $(SRC_DIR)/point.h $(GTEST_HEADERS)
-	$(++) $(CPPFLAGS) $(CXXFLAGS) -I$(SRC_DIR) -c $(TEST_DIR)/point_unittest.cc
+$(TEST_OBJS): $(TEST_DIR)/*.cc $(SRC_DIR)/*.h $(GTEST_HEADERS)
+	$(++) $(CPPFLAGS) $(CXXFLAGS) -I$(SRC_DIR) -c $(TEST_DIR)/*.cc
 
-$(UNITTESTS): point.o point_unittest.o gtest_main.a
+$(UNITTESTS): $(OBJS) $(TEST_OBJS) gtest_main.a
 	$(++) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
