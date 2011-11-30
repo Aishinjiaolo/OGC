@@ -26,3 +26,11 @@ To run:
 To clean:
   ./make clean
 
+To make unit test:
+  ./make gtest
+
+To run unit test:
+  ./unittest
+
+To clean unit test:
+  ./make gtclean
