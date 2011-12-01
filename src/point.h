@@ -3,6 +3,10 @@
 #include <vector>
 #include <algorithm>
 #include <sys/time.h>
+#include <cmath>
+
+const double EPS  = 0.000001;
+const double GRID = 0.25;
 
 using namespace std;
 
