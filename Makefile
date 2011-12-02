@@ -16,7 +16,7 @@ RUN     = run
 # my unit test
 UNITTESTS = unittest
 TEST_DIR  = $(CURD)/test
-TEST_SRCS = point_unittest.cc segment_unittest.cc
+TEST_SRCS = point_unittest.cc segment_unittest.cc polygon_unittest.cc
 TEST_OBJS = $(TEST_SRCS:.cc=.o)
 
 # gtest framework
