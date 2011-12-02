@@ -27,10 +27,10 @@ To clean:
   ./make clean
 
 To make unit test:
-  ./make gtest
+  ./make test
 
 To run unit test:
   ./unittest
 
 To clean unit test:
-  ./make gtclean
+  ./make tclean

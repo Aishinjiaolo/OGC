@@ -43,9 +43,9 @@ clean:
 	rm -f $(OBJS) $(LINK) $(LIB) $(RUN)
 
 
-gtest: $(UNITTESTS)
+test: $(UNITTESTS)
 
-gtclean:
+tclean:
 	rm -f $(UNITTESTS) gtest.a gtest_main.a *.o
 
 gtest-all.o: $(GTEST_SRCS_)
