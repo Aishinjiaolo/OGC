@@ -1,5 +1,9 @@
 #include "polygon.h"
 
+Segment *Polygon::get_segment(int index) {
+    return _segments->get_segment(index);
+}
+
 void Polygon::set_polygon(Segments *segments) {
     _segments = segments;
     _segment_numbers = segments->size();

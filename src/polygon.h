@@ -8,6 +8,8 @@ class Polygon {
         double get_area();
         int    get_segment_number();
 
+        Segment *get_segment(int index);
+
     private:
         Segments *_segments;
         double _area;
