@@ -91,6 +91,14 @@ int main() {
             << all.get_segment(i)->get_tail()->get_gy() << endl;
     }
 
+    Polygon polygon1;
+    polygon1.set_polygon(&all);
+    cout << polygon1.get_segment_number()
+        << " segments in this polygon" << endl;
+    cout << "center point of this polygon is: "
+        << polygon1.get_center().get_gx() << ", "
+        << polygon1.get_center().get_gy() << endl;
+
     profiler.end();
 
     return 0;

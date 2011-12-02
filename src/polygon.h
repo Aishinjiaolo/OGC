@@ -6,20 +6,22 @@ class Polygon {
         
         Point  get_center();
         double get_area();
-        int    size();
+        int    get_segment_number();
 
     private:
+        Segments *_segments;
         double _area;
-        int    _size;
+        int    _segment_numbers;
 };
 
 class Polygons {
     public:
         void append(Polygon *polygon);
-        void sort();
+        void sort_by_x();
+        void sort_by_y();
 
         Polygon get_polygon(int index);
-        int size();
+        int get_polygon_number();
 
     private:
         vector<Polygon*> _polygons;
