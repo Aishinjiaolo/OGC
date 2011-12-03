@@ -36,6 +36,9 @@ typedef struct ktInterp_struct {
 } ktInterp;
 
 static void (*segment_function)(ktInterp *kt) = NULL;
-void set_segment_function(void (*segment_function)(ktInterp *kt));
+void set_segment_function(
+        void (*seg_function)(ktInterp *kt)) {
+    segment_function = seg_function;
+}
 void loop_segment(Polygon *polygon);
 

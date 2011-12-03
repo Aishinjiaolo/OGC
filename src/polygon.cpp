@@ -1,11 +1,5 @@
 #include "polygon.h"
 
-void set_segment_function(
-        void (*seg_function)(ktInterp *kt))
-{
-    segment_function = seg_function;
-}
-
 void loop_segment(Polygon *polygon) {
     if (segment_function == NULL) return;
 
