@@ -1,5 +1,22 @@
 #include "polygon.h"
 
+void set_segment_function(
+        void (*seg_function)(ktInterp *kt))
+{
+    segment_function = seg_function;
+}
+
+void loop_segment(Polygon *polygon) {
+    if (segment_function == NULL) return;
+
+    for (int i = 0; i < polygon->get_segment_number(); i++) {
+        ktInterp kt;
+        kt.seg_index = i;
+        kt.polygon   = polygon;
+        segment_function(&kt);
+    }
+}
+
 Segment *Polygon::get_segment(int index) {
     return _segments->get_segment(index);
 }

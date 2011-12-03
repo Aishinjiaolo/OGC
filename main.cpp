@@ -1,5 +1,11 @@
 #include "polygon.h"
 
+void print_vertex(ktInterp *kt) {
+    printf("x, y = %f, %f\n",
+            kt->polygon->get_segment(kt->seg_index)->get_tail()->get_gx(),
+            kt->polygon->get_segment(kt->seg_index)->get_tail()->get_gy());
+}
+
 int main() {
     // profiler
     Profiler profiler;
@@ -98,6 +104,11 @@ int main() {
     cout << "center point of this polygon is: "
         << polygon1.get_center().get_gx() << ", "
         << polygon1.get_center().get_gy() << endl;
+
+    cout << "try segment loop on a polygon :" << endl;
+
+    set_segment_function(print_vertex);
+    loop_segment(&polygon1);
 
     profiler.end();
 

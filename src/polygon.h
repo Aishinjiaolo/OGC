@@ -28,3 +28,14 @@ class Polygons {
     private:
         vector<Polygon*> _polygons;
 };
+
+typedef struct ktInterp_struct {
+    int seg_index;
+    int poly_index;
+    Polygon *polygon;
+} ktInterp;
+
+static void (*segment_function)(ktInterp *kt) = NULL;
+void set_segment_function(void (*segment_function)(ktInterp *kt));
+void loop_segment(Polygon *polygon);
+
