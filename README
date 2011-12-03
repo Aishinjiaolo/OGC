@@ -5,13 +5,16 @@ For segment based geometry learning,
 it will keep updating.
 
 
-Currently containing: 
+Currently containing:
 
-API 'point'   => point.cpp   point.h
-API 'segment' => segment.cpp segment.h
-API 'polygon' => polygon.cpp polygon.h
-usage flow    => main.cpp
-auto make     => Makefile
+source code: (./src/)
+'point'   => point.cpp   point.h
+'segment' => segment.cpp segment.h
+'polygon' => polygon.cpp polygon.h
+
+usage demo: (./)
+usage flow => main.cpp
+auto make  => Makefile
 
 
 To make all:
@@ -26,6 +29,16 @@ To run:
 To clean:
   ./make clean
 
+
+Unit test is run under google test framework.
+
+1. Please go to: http://code.google.com/p/googletest/
+   and download the latest version of gtest
+   (currently, I am using version 1.6.0)
+2. Put gtest whereever you like
+3. Edit Makefile, and modify 'TEST_DIR' to your gtest dir.
+4. Put every unit test file(*.cc) in ./test/
+
 To make unit test:
   ./make test
 
@@ -34,3 +47,7 @@ To run unit test:
 
 To clean unit test:
   ./make tclean
+
+Some unit test's been put in ./test/ for your reference.
+
+
