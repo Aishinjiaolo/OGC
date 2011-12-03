@@ -6,7 +6,7 @@ FLOW    = $(CURD)/main.cpp
 
 # my source / library
 SRC_DIR = $(CURD)/src
-SRC     = point.cpp segment.cpp polygon.cpp
+SRC     = point.cpp segment.cpp polygon.cpp api.cpp
 OBJS    = $(SRC:.cpp=.o)
 LINK    = lib_$(VERSION).so
 LIB     = lib-$(VERSION).so

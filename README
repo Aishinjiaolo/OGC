@@ -11,6 +11,7 @@ source code: (./src/)
 'point'   => point.cpp   point.h
 'segment' => segment.cpp segment.h
 'polygon' => polygon.cpp polygon.h
+'api'     => api.cpp     api.h
 
 usage demo: (./)
 usage flow => main.cpp

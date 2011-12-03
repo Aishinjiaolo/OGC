@@ -1,15 +1,5 @@
 #include "point.h"
 
-void Profiler::end() {
-    gettimeofday(&_end, NULL);
-    cout << "Time elapsed " <<
-        _end.tv_usec - _start.tv_usec << " usec" << endl;
-}
-
-void Profiler::start() {
-    gettimeofday(&_start, NULL);
-}
-
 bool sort_by_gx_descending(Point a, Point b) {
     if (a.get_gx() > b.get_gx()) return true;
     if (a.get_gx() == b.get_gx() && a.get_gy() > b.get_gy()) return true;

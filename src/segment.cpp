@@ -8,7 +8,7 @@ void Segment::dump() {
 }
 
 void Segments::dump() {
-    for (int i = 0; i < _segments.size(); i++) {
+    for (unsigned int i = 0; i < _segments.size(); i++) {
         printf("segment(%d):\n", i);
         _segments[i]->dump();
     }
