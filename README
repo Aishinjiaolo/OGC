@@ -33,9 +33,9 @@ To clean:
 Unit test is run under google test framework.
 
 1. Please go to: http://code.google.com/p/googletest/
-   and download the latest version of gtest
+   and download the latest version of gtest.
    (currently, I am using version 1.6.0)
-2. Put gtest whereever you like
+2. Put gtest wherever you like.
 3. Edit Makefile, and modify 'TEST_DIR' to your gtest dir.
 4. Put every unit test file(*.cc) in ./test/
 
