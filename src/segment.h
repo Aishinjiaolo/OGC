@@ -10,6 +10,8 @@ class Segment {
         double get_length();
         double get_angle();
 
+        void dump();
+
     private:
         Point  *_head;
         Point  *_tail;
@@ -26,6 +28,8 @@ class Segments {
         
         Segment *get_segment(int index);
         int size();
+
+        void dump();
 
     private:
         vector<Segment*> _segments;

@@ -85,3 +85,13 @@ double Point::get_gy() {
     return _gy;
 }
 
+void Points::dump() {
+    for (unsigned int i = 0; i < _points.size(); i++) {
+        printf("(%d): ", i);
+        _points[i].dump();
+    }
+}
+
+void Point::dump() {
+    printf("point(x, y) = %f, %f\n", _gx, _gy);
+}

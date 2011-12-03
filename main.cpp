@@ -1,9 +1,23 @@
 #include "polygon.h"
 
+// callback segment function
 void print_vertex(ktInterp *kt) {
-    printf("x, y = %f, %f\n",
-            kt->polygon->get_segment(kt->seg_index)->get_tail()->get_gx(),
-            kt->polygon->get_segment(kt->seg_index)->get_tail()->get_gy());
+    int i = kt->seg_index;
+    printf("(%d)\n", i);
+    kt->polygon->get_segment(i)->dump();
+}
+
+void grow_45_degree(ktInterp *kt) {
+    int i = kt->seg_index;
+    double tail_x = kt->polygon->get_segment(i)->get_tail()->get_gx();
+    double tail_y = kt->polygon->get_segment(i)->get_tail()->get_gy();
+
+    if (tail_x == tail_y) {
+        double new_tail_x = tail_x >= 0 ? tail_x + 1 : tail_x - 1;
+        double new_tail_y = new_tail_x;
+        kt->polygon->get_segment(i)->get_tail()
+            ->set_point(new_tail_x, new_tail_y);
+    }
 }
 
 int main() {
@@ -25,19 +39,13 @@ int main() {
     Points main_points;
     main_points.parse_1d_points_from(main_1d_points);
     main_points.sort_by_y();
-    
-    for (int i = 0; i < main_points.size(); i++) {
-        cout << main_points.get_point(i).get_gx() << "\t"
-            << main_points.get_point(i).get_gy() << endl;
-    }
+
+    main_points.dump();
 
     Points center;
     center.create_center_from(main_points);
 
-    for (int i = 0; i < center.size(); i++) {
-        cout << center.get_point(i).get_gx() << "\t"
-            << center.get_point(i).get_gy() << endl;
-    }
+    center.dump();
 
     Point a, b, c, d, e, f, g, h;
     a.set_point( 0,  0);
@@ -69,46 +77,28 @@ int main() {
     all.append(&gh);
     all.append(&ha);
 
-    for (int i = 0; i < all.size(); i++) {
-        cout << "segment " << i << ": "
-            << all.get_segment(i)->get_head()->get_gx() << ", "
-            << all.get_segment(i)->get_head()->get_gy() << endl;
-        cout << "           "
-            << all.get_segment(i)->get_tail()->get_gx() << ", "
-            << all.get_segment(i)->get_tail()->get_gy() << endl;
-    }
-
-    for (int i = 0; i < all.size(); i++) {
-        double tail_x = all.get_segment(i)->get_tail()->get_gx();
-        double tail_y = all.get_segment(i)->get_tail()->get_gy();
-        if (tail_x == tail_y) {
-            double new_tail_x = tail_x >= 0 ? tail_x + 1 : tail_x - 1;
-            double new_tail_y = new_tail_x;
-            all.get_segment(i)->get_tail()->set_point(new_tail_x, new_tail_y);
-        }
-    }
-
-    for (int i = 0; i < all.size(); i++) {
-        cout << "segment " << i << ": "
-            << all.get_segment(i)->get_head()->get_gx() << ", "
-            << all.get_segment(i)->get_head()->get_gy() << endl;
-        cout << "           "
-            << all.get_segment(i)->get_tail()->get_gx() << ", "
-            << all.get_segment(i)->get_tail()->get_gy() << endl;
-    }
+    all.dump();
 
     Polygon polygon1;
     polygon1.set_polygon(&all);
-    cout << polygon1.get_segment_number()
+
+    set_segment_function(grow_45_degree);
+    loop_segment(&polygon1);
+
+    all.dump();
+
+    Polygon polygon2;
+    polygon2.set_polygon(&all);
+    cout << polygon2.get_segment_number()
         << " segments in this polygon" << endl;
     cout << "center point of this polygon is: "
-        << polygon1.get_center().get_gx() << ", "
-        << polygon1.get_center().get_gy() << endl;
+        << polygon2.get_center().get_gx() << ", "
+        << polygon2.get_center().get_gy() << endl;
 
     cout << "try segment loop on a polygon :" << endl;
 
     set_segment_function(print_vertex);
-    loop_segment(&polygon1);
+    loop_segment(&polygon2);
 
     profiler.end();
 

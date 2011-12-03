@@ -1,5 +1,19 @@
 #include "segment.h"
 
+void Segment::dump() {
+    printf("head: ");
+    _head->dump();
+    printf("tail: ");
+    _tail->dump();
+}
+
+void Segments::dump() {
+    for (int i = 0; i < _segments.size(); i++) {
+        printf("segment(%d):\n", i);
+        _segments[i]->dump();
+    }
+}
+
 int Segments::size() {
     return _segments.size();
 }

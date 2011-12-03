@@ -27,6 +27,7 @@ class Point {
         void set_point(double gx, double gy);
         void get_center_of(Point point1, Point point2);
 
+        void dump();
     private:
         double _gx;
         double _gy;
@@ -42,6 +43,8 @@ class Points {
         
         Point get_point(int index);
         int size();
+
+        void dump();
 
     private:
         vector<Point> _points;
