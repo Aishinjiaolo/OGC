@@ -87,6 +87,7 @@ int main() {
 
     all.dump();
 
+    // test polygon function
     Polygon polygon2;
     polygon2.set_polygon(&all);
     cout << polygon2.get_segment_number()
@@ -100,6 +101,8 @@ int main() {
     set_segment_function(print_vertex);
     loop_segment(&polygon2);
 
+    // try loop segment without function set
+    loop_segment(&polygon2);
     profiler.end();
 
     return 0;

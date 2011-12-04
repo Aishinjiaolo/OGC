@@ -6,12 +6,7 @@ typedef struct ktInterp_struct {
     Polygon *polygon;
 } ktInterp;
 
-static void (*segment_function)(ktInterp *kt) = NULL;
-
-void set_segment_function(
-        void (*seg_function)(ktInterp *kt)) {
-    segment_function = seg_function;
-}
+void set_segment_function(void (*seg_function)(ktInterp *kt));
 
 void loop_segment(Polygon *polygon);
 
