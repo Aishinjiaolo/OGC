@@ -105,5 +105,15 @@ int main() {
     loop_segment(&polygon2);
     profiler.end();
 
+    printf("\ntry to dump polygon\n");
+    polygon1.dump();
+    polygon2.dump();
+
+    Polygons polygons;
+    polygons.append(&polygon1);
+    polygons.append(&polygon2);
+    printf("\ntry to dump polygons\n");
+    polygons.dump();
+
     return 0;
 }

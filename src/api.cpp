@@ -13,7 +13,7 @@ void loop_segment(Polygon *polygon) {
         return;
     }
 
-    for (int i = 0; i < polygon->get_segment_number(); i++) {
+    for (unsigned int i = 0; i < polygon->get_segment_number(); i++) {
         ktInterp kt;
         kt.seg_index = i;
         kt.polygon   = polygon;
