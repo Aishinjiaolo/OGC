@@ -28,9 +28,11 @@ void loop_segment(Polygons *polygons) {
 
 void Profiler::end() {
     gettimeofday(&_end, NULL);
-    printf("Time elapsed %d usec.\n", _end.tv_usec - _start.tv_usec);
+    printf("Function '%s' 1 call, time elapsed %d usec.\n",
+            _function_name, _end.tv_usec - _start.tv_usec);
 }
 
-void Profiler::start() {
+void Profiler::start(char *function_name) {
+    _function_name = function_name;
     gettimeofday(&_start, NULL);
 }

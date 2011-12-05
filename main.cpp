@@ -17,7 +17,7 @@ void grow_45_degree(ktInterp *kt) {
 int main() {
     // profiler
     Profiler profiler;
-    profiler.start();
+    profiler.start((char*)"main");
 
     // random generate 1d vector
     // assign maximum size =>
