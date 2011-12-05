@@ -20,7 +20,7 @@ Polygon *Polygons::get_polygon(int index) {
     return _polygons[index];
 }
 
-int Polygons::size() {
+unsigned int Polygons::size() {
     return _polygons.size();
 }
 

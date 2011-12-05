@@ -43,7 +43,7 @@ clean:
 	rm -f $(OBJS) $(LINK) $(LIB) $(RUN)
 
 
-test: $(UNITTESTS)
+gtest: $(UNITTESTS)
 
 tclean:
 	rm -f $(UNITTESTS) gtest.a gtest_main.a *.o

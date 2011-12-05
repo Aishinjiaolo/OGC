@@ -36,7 +36,7 @@ TEST(PolygonTest, SetPolygon) {
         Polygon p;
         p.set_polygon(&ss);
 
-        EXPECT_EQ(4, p.get_segment_number());
+        EXPECT_EQ(4, (int) p.get_segment_number());
         EXPECT_EQ(x1, p.get_segment(0)->get_head()->get_gx());
         EXPECT_EQ(y1, p.get_segment(0)->get_head()->get_gy());
         EXPECT_EQ(x2, p.get_segment(1)->get_head()->get_gx());

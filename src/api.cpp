@@ -7,17 +7,20 @@ void set_segment_function(
     segment_function = seg_function;
 }
 
-void loop_segment(Polygon *polygon) {
+void loop_segment(Polygons *polygons) {
     if (segment_function == NULL) {
         printf("no segment function set!!\n");
         return;
     }
 
-    for (unsigned int i = 0; i < polygon->get_segment_number(); i++) {
-        ktInterp kt;
-        kt.seg_index = i;
-        kt.polygon   = polygon;
-        segment_function(&kt);
+    for (unsigned int i = 0; i < polygons->size(); i++) {
+        Polygon *polygon = polygons->get_polygon(i);
+        for (unsigned int j = 0; j < polygon->get_segment_number(); j++) {
+            ktInterp kt;
+            kt.seg_index = j;
+            kt.polygon   = polygon;
+            segment_function(&kt);
+        }
     }
     
     segment_function = NULL;
@@ -25,8 +28,7 @@ void loop_segment(Polygon *polygon) {
 
 void Profiler::end() {
     gettimeofday(&_end, NULL);
-    cout << "Time elapsed " <<
-        _end.tv_usec - _start.tv_usec << " usec" << endl;
+    printf("Time elapsed %d usec.\n", _end.tv_usec - _start.tv_usec);
 }
 
 void Profiler::start() {

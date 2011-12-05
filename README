@@ -41,7 +41,7 @@ Unit test is run under google test framework.
 4. Put every unit test file(*.cc) in ./test/
 
 To make unit test:
-  ./make test
+  ./make gtest
 
 To run unit test:
   ./unittest

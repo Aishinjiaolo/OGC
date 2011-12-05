@@ -8,7 +8,6 @@ typedef struct ktInterp_struct {
 
 void set_segment_function(void (*seg_function)(ktInterp *kt));
 
-void loop_segment(Polygon *polygon);
 void loop_segment(Polygons *polygons);
 
 class Profiler {

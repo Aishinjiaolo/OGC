@@ -1,12 +1,6 @@
 #include "api.h"
 
 // callback segment function
-void print_vertex(ktInterp *kt) {
-    int i = kt->seg_index;
-    printf("(%d)\n", i);
-    kt->polygon->get_segment(i)->dump();
-}
-
 void grow_45_degree(ktInterp *kt) {
     int i = kt->seg_index;
     double tail_x = kt->polygon->get_segment(i)->get_tail()->get_gx();
@@ -29,7 +23,7 @@ int main() {
     // assign maximum size =>
     const int max = 100;
     vector<double> main_1d_points(max);
-    
+
     srand(time(NULL));
     for (int i = 0; i < max; i++) {
         main_1d_points[i] = rand() % 100;
@@ -47,6 +41,7 @@ int main() {
 
     center.dump();
 
+    // create a set of points
     Point a, b, c, d, e, f, g, h;
     a.set_point( 0,  0);
     b.set_point( 5,  0);
@@ -56,7 +51,8 @@ int main() {
     f.set_point(-5,  0);
     g.set_point(-5, -5);
     h.set_point( 0, -5);
-    
+
+    // form each segment
     Segment ab, bc, cd, de, ef, fg, gh, ha;
     ab.set_segment(&a, &b);
     bc.set_segment(&b, &c);
@@ -67,6 +63,7 @@ int main() {
     gh.set_segment(&g, &h);
     ha.set_segment(&h, &a);
 
+    // form a set of segments
     Segments all;
     all.append(&ab);
     all.append(&bc);
@@ -79,41 +76,37 @@ int main() {
 
     all.dump();
 
+    // set the set of segments to a polygon
+    // and test polygon function
     Polygon polygon1;
     polygon1.set_polygon(&all);
+    polygon1.dump();
+    printf("(%d) segments in this polygon\n", polygon1.get_segment_number());
+    printf("center point of this polygon is (%f, %f)\n",
+            polygon1.get_center().get_gx(),
+            polygon1.get_center().get_gy());
 
-    set_segment_function(grow_45_degree);
-    loop_segment(&polygon1);
-
-    all.dump();
-
-    // test polygon function
+    // set the set of segments to another polygon
+    // yet, they reference the same segments set
     Polygon polygon2;
     polygon2.set_polygon(&all);
-    cout << polygon2.get_segment_number()
-        << " segments in this polygon" << endl;
-    cout << "center point of this polygon is: "
-        << polygon2.get_center().get_gx() << ", "
-        << polygon2.get_center().get_gy() << endl;
-
-    cout << "try segment loop on a polygon :" << endl;
-
-    set_segment_function(print_vertex);
-    loop_segment(&polygon2);
-
-    // try loop segment without function set
-    loop_segment(&polygon2);
-    profiler.end();
-
-    printf("\ntry to dump polygon\n");
-    polygon1.dump();
     polygon2.dump();
 
+    // append the polygons into a set of polygons
     Polygons polygons;
     polygons.append(&polygon1);
     polygons.append(&polygon2);
-    printf("\ntry to dump polygons\n");
+
+    // set segment function and loop all polygons set
+    set_segment_function(grow_45_degree);
+    loop_segment(&polygons);
+
     polygons.dump();
+
+    // try loop segment without function set
+    loop_segment(&polygons);
+
+    profiler.end();
 
     return 0;
 }

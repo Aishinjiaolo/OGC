@@ -25,7 +25,7 @@ class Polygons {
         void sort_by_y();
 
         Polygon *get_polygon(int index);
-        int size();
+        unsigned int size();
 
         void dump();
 
