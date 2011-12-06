@@ -55,7 +55,7 @@ TEST(SegmentTest, GetProperty) {
     }
 
     for (int i = 0; i < size; i++) {
-        int digit = (rand() % 100) * GRID;
+        double digit = (rand() % 100) * GRID;
         double length = (rand() % 100000) * digit;
         double x1 = (rand() % 100) * digit;
         double y1 = (rand() % 100) * digit;
