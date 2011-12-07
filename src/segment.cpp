@@ -14,7 +14,7 @@ void Segments::dump() {
     }
 }
 
-int Segments::size() {
+unsigned int Segments::size() {
     return _segments.size();
 }
 

@@ -27,7 +27,7 @@ class Segments {
         void sort_by_y();
         
         Segment *get_segment(int index);
-        int size();
+        unsigned int size();
 
         void dump();
 
