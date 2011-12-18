@@ -1,5 +1,18 @@
 #include "polygon.h"
 
+void Polygon::copy(Polygon context) {
+    unsigned int segment_number = context.get_segment_number();
+
+    Segments *new_segments = new Segments;
+    for (unsigned int i = 0; i < segment_number; ++i) {
+        Segment *new_segment = new Segment;
+        new_segment->copy(*context.get_segment(i));
+        new_segments->append(new_segment);
+    }
+
+    this->set_polygon(new_segments);
+}
+
 void Polygons::dump() {
     printf("\n In these polygons dump:\n");
     for (unsigned int i = 0; i < _polygons.size(); i++) {

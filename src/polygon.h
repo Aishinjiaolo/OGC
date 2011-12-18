@@ -11,6 +11,7 @@ class Polygon {
         Segment *get_segment(int index);
 
         void dump();
+        void copy(Polygon context);
 
     private:
         Segments *_segments;

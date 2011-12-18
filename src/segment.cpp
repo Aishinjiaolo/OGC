@@ -1,5 +1,20 @@
 #include "segment.h"
 
+void Segment::copy(Segment context) {
+    double head_x = context.get_head()->get_gx();
+    double head_y = context.get_head()->get_gy();
+    double tail_x = context.get_tail()->get_gx();
+    double tail_y = context.get_tail()->get_gy();
+
+    Point *new_head = new Point;
+    Point *new_tail = new Point;
+
+    new_head->set_point(head_x, head_y);
+    new_tail->set_point(tail_x, tail_y);
+
+    this->set_segment(new_head, new_tail);
+}
+
 void Segment::dump() {
     printf("head: ");
     _head->dump();

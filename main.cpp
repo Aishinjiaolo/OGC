@@ -63,6 +63,12 @@ int main() {
     gh.set_segment(&g, &h);
     ha.set_segment(&h, &a);
 
+    // try segment copy
+    Segment copy_test;
+    copy_test.copy(ab);
+    printf("copy segment:\n");
+    copy_test.dump();
+
     // form a set of segments
     Segments all;
     all.append(&ab);
@@ -88,14 +94,21 @@ int main() {
 
     // set the set of segments to another polygon
     // yet, they reference the same segments set
+    printf("\nthis is polygon2\n");
     Polygon polygon2;
     polygon2.set_polygon(&all);
     polygon2.dump();
 
+    // try polygon copy
+    printf("\nthis is polygon3\n");
+    Polygon polygon3;
+    polygon3.copy(polygon2);
+    polygon3.dump();
+
     // append the polygons into a set of polygons
     Polygons polygons;
     polygons.append(&polygon1);
-    polygons.append(&polygon2);
+    polygons.append(&polygon3);
 
     // set segment function and loop all polygons set
     set_segment_function(grow_45_degree);

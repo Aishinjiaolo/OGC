@@ -11,6 +11,7 @@ class Segment {
         double get_angle();
 
         void dump();
+        void copy(Segment context);
 
     private:
         Point  *_head;
