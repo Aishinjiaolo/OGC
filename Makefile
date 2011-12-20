@@ -28,6 +28,9 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
                 $(GTEST_DIR)/include/gtest/internal/*.h
 GTEST_SRCS_   = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
 
+# run python flow
+PY_FLOW    = run.py
+PY_LIB_DIR = $(CURD)/py_lib
 
 all: $(FLOW) $(LINK)
 	$(++) -Wall -I$(SRC_DIR) -o $(RUN) $(FLOW) $(LINK)
@@ -70,3 +73,9 @@ $(TEST_OBJS): $(TEST_DIR)/*.cc $(SRC_DIR)/*.h $(GTEST_HEADERS)
 
 $(UNITTESTS): $(OBJS) $(TEST_OBJS) gtest_main.a
 	$(++) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+
+pyflow: $(PY_FLOW)
+	$(CURD)/$(PY_FLOW)
+
+pyclean:
+	rm -f $(PY_LIB_DIR)/*.pyc
