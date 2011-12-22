@@ -27,8 +27,8 @@ class Segment {
 class Segments {
     public:
         void append(Segment *segment);
-        void sort_by_x();
-        void sort_by_y();
+        //void sort_by_x();
+        //void sort_by_y();
         void dump();
 
         Segment *get_segment(int index);

@@ -6,7 +6,7 @@ class Polygon {
         void dump();
         void copy(Polygon context);
 
-        double get_area();
+        //double get_area();
 
         unsigned int get_segment_number();
 
@@ -25,8 +25,8 @@ class Polygon {
 class Polygons {
     public:
         void append(Polygon *polygon);
-        void sort_by_x();
-        void sort_by_y();
+        //void sort_by_x();
+        //void sort_by_y();
         void dump();
 
         Polygon *get_polygon(int index);

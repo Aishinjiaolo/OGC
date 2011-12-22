@@ -9,14 +9,50 @@ if swig_folder not in sys.path:
     sys.path.insert(0, swig_folder)
 
 import gdspy
-import api
-import polygon
-import segment
 import point
+import segment
+import polygon
+import api
 
-point1 = api.Point()
+point1 = point.Point()
 point1.set_point(10, 20)
 print "point1 = ", point1.get_gx(), point1.get_gy()
+
+point2 = point.Point()
+point2.set_point(30, 40)
+print "point2 = ", point2.get_gx(), point2.get_gy()
+
+point3 = point.Point()
+point3.set_point(50, 60)
+print "point3 = ", point3.get_gx(), point3.get_gy()
+
+point4 = point.Point()
+point4.set_point(70, 80)
+print "point4 = ", point4.get_gx(), point4.get_gy()
+
+segment1 = segment.Segment()
+segment1.set_segment(point1, point2)
+print "dump segment1:\n", segment1.dump()
+
+segment2 = segment.Segment()
+segment2.set_segment(point2, point3)
+print "dump segment2:\n", segment2.dump()
+
+segment3 = segment.Segment()
+segment3.set_segment(point3, point4)
+print "dump segment3:\n", segment3.dump()
+
+segment4 = segment.Segment()
+segment4.set_segment(point4, point1)
+print "dump segment4:\n", segment4.dump()
+
+segments1 = segment.Segments()
+segments1.append(segment1)
+segments1.append(segment2)
+segments1.append(segment3)
+segments1.append(segment4)
+print "dump segments1:\n", segments1.dump()
+
 
 g_cell = gdspy.Cell('polygon')
 points = [(0, 0), (2, 2), (2, 6), (-6, 6), (-6, -6), (-4, -4), (-4, 4), (0, 4)]

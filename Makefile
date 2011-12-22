@@ -28,17 +28,19 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
                 $(GTEST_DIR)/include/gtest/internal/*.h
 GTEST_SRCS_   = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
 
-# run bundled python flow
+# bundled python flow
 PY_FLOW          = run.py
 PY_LIB_DIR       = $(CURD)/py_lib
 PY_INTERFACE_DIR = $(CURD)/swig
-CAPI             = api
-PY_BUNDLE_LIB    = _$(CAPI).so
-PY_INTERFACE     = api.i
+CAPI             = api polygon segment point
+PY_BUNDLE        = py_bundle
+PY_BUNDLE_LIB    = $(CAPI:%=_%.so)
+PY_INTERFACE     = $(CAPI:=.i)
 PY_INTERFACE_SRC = $(PY_INTERFACE:.i=_wrap.cxx)
 PY_INTERFACE_OBJ = $(PY_INTERFACE_SRC:.cxx=.o)
 PY_INCLUDE_DIR   = /System/Library/Frameworks/Python.framework/Versions/2.7/include/python2.7
 PY_CONFIG_DIR    = /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/config
+
 
 # build c++ library and main flow
 all: $(FLOW) $(LINK)
@@ -85,20 +87,30 @@ $(UNITTESTS): $(OBJS) $(TEST_OBJS) gtest_main.a
 	$(++) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
 
 
-# build python flow with capi
-pyflow: $(PY_FLOW) $(PY_BUNDLE_LIB) $(LINK)
+# build capi with swig to run python flow
+pyflow: $(PY_FLOW) $(PY_BUNDLE) $(LINK)
 	$(CURD)/$(PY_FLOW)
 
-$(PY_BUNDLE_LIB): $(PY_INTERFACE_DIR)/$(PY_INTERFACE) $(LINK)
-	swig -python -c++ $(PY_INTERFACE_DIR)/$(PY_INTERFACE)
-	swig -python -c++ $(PY_INTERFACE_DIR)/polygon.i
-	swig -python -c++ $(PY_INTERFACE_DIR)/segment.i
-	swig -python -c++ $(PY_INTERFACE_DIR)/point.i
-	$(++) -c -fPIC -Wall $(PY_INTERFACE_DIR)/*.cxx -I$(PY_INCLUDE_DIR) -I$(PY_CONFIG_DIR)
-	$(++) -bundle -undefined suppress -flat_namespace $(PY_INTERFACE_OBJ)  $(LINK) -o $(PY_INTERFACE_DIR)/$(PY_BUNDLE_LIB)
-	$(++) -bundle -undefined suppress -flat_namespace polygon_wrap.o  $(LINK) -o $(PY_INTERFACE_DIR)/_polygon.so
-	$(++) -bundle -undefined suppress -flat_namespace segment_wrap.o  $(LINK) -o $(PY_INTERFACE_DIR)/_segment.so
-	$(++) -bundle -undefined suppress -flat_namespace point_wrap.o  $(LINK) -o $(PY_INTERFACE_DIR)/_point.so
+$(PY_BUNDLE): $(PY_INTERFACE_DIR)/*.i $(LINK)
+	for interface in $(PY_INTERFACE) ; do \
+		swig -python -c++ $(PY_INTERFACE_DIR)/$$interface ; \
+	done
+
+	for py_src in $(PY_INTERFACE_SRC) ; do \
+		$(++) -c -fPIC -Wall $(PY_INTERFACE_DIR)/$$py_src -I$(PY_INCLUDE_DIR) -I$(PY_CONFIG_DIR) ; \
+	done
+
+	object_index=0 ; \
+	for py_obj in $(PY_INTERFACE_OBJ) ; do \
+		lib_index=0 ; \
+		for py_lib in $(PY_BUNDLE_LIB) ; do \
+			if [ $$object_index -eq $$lib_index ] ; then \
+				$(++) -bundle -undefined suppress -flat_namespace $$py_obj $(LINK) -o $(PY_INTERFACE_DIR)/$$py_lib ; \
+			fi ; \
+			((lib_index = lib_index + 1)) ; \
+		done ; \
+		((object_index = object_index + 1)) ; \
+	done ; \
 
 pyclean:
 	rm -f $(PY_LIB_DIR)/*.pyc
@@ -106,5 +118,4 @@ pyclean:
 	rm -f $(PY_INTERFACE_DIR)/*.pyc
 	rm -f $(PY_INTERFACE_DIR)/*.cxx
 	rm -f $(PY_INTERFACE_DIR)/*.so
-	rm -f $(CURD)/*.o
-	rm -f $(OBJS) $(LINK) $(LIB) $(PY_INTERFACE_OBJ) $(PY_BUNDLE_LIB)
+	rm -f $(OBJS) $(LINK) $(LIB) $(PY_INTERFACE_OBJ)
