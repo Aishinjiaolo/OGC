@@ -14,12 +14,15 @@ import segment
 import polygon
 import api
 
+profiler = api.Profiler()
+profiler.start("python flow")
+
 point1 = point.Point()
-point1.set_point(10, 20)
+point1.set_point(-10, -20)
 print "point1 = ", point1.get_gx(), point1.get_gy()
 
 point2 = point.Point()
-point2.set_point(30, 40)
+point2.set_point(30, -40)
 print "point2 = ", point2.get_gx(), point2.get_gy()
 
 point3 = point.Point()
@@ -27,7 +30,7 @@ point3.set_point(50, 60)
 print "point3 = ", point3.get_gx(), point3.get_gy()
 
 point4 = point.Point()
-point4.set_point(70, 80)
+point4.set_point(-70, 80)
 print "point4 = ", point4.get_gx(), point4.get_gy()
 
 segment1 = segment.Segment()
@@ -53,14 +56,39 @@ segments1.append(segment3)
 segments1.append(segment4)
 print "dump segments1:\n", segments1.dump()
 
+polygon_1 = polygon.Polygon()
+polygon_1.set_polygon(segments1)
+polygon_1.dump()
+
+polygon_copy = polygon.Polygon()
+polygon_copy.copy(polygon_1)
+polygon_copy.dump()
+
+polygon_1.get_segment(0).get_head().set_point(100, 100)
+polygon_1.dump()
+polygon_copy.dump()
+
+# this should be wrapped from c
+def add_polygon(polygon):
+    points_array = []
+    length = polygon.get_segment_number()
+    for index in range(length):
+       point = (polygon.get_segment(index).get_head().get_gx(), \
+                polygon.get_segment(index).get_head().get_gy())
+       points_array.append(point)
+    return points_array
+
+points_array = add_polygon(polygon_copy)
+print "points array: ", points_array
 
 g_cell = gdspy.Cell('polygon')
 points = [(0, 0), (2, 2), (2, 6), (-6, 6), (-6, -6), (-4, -4), (-4, 4), (0, 4)]
-polygon1 = gdspy.Polygon(1, points)
+polygon1 = gdspy.Polygon(1, points_array)
 g_cell.add(polygon1)
 
 name = os.path.abspath(os.path.dirname(os.sys.argv[0])) + os.sep + 'sample'
 gdspy.gds_print(name + '.gds', unit = 1.0e-6, precision = 1.0e-9)
 print 'Sample gds file saved: ' + name + '.gds'
 
+profiler.end()
 
