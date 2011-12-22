@@ -52,3 +52,21 @@ To clean unit test:
 Some unit test's been put in ./test/ for your reference.
 
 
+Python bundle flow is supportted by SWIG wrapping
+
+1. Please go to: http://www.swig.org/
+   and download the latest version of SWIG.
+   (currently, I am using version 2.0.4)
+2. You may modify the run.py in current directory which is
+   supposed to import bundled capi library.
+3. You may write out GDSII files to validate your geometry
+   in this python flow.
+4. GDSII module is from http://sourceforge.net/projects/gdspy/
+
+To make and run python flow:
+  ./make pyflow
+
+To clean python flow:
+  ./make pyclean
+
+A sample GDSII file: sample.gds will be generated in current directory.
