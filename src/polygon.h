@@ -5,6 +5,8 @@ class Polygon {
         void set_polygon(Segments *segments);
         void dump();
         void copy(Polygon context);
+        void free();
+        ~Polygon() {printf("~Polygon()\n");};
 
         //double get_area();
 

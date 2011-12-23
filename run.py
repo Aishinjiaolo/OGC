@@ -58,15 +58,15 @@ print "dump segments1:\n", segments1.dump()
 
 polygon_1 = polygon.Polygon()
 polygon_1.set_polygon(segments1)
-polygon_1.dump()
+print "dump polygon_1\n", polygon_1.dump()
 
 polygon_copy = polygon.Polygon()
 polygon_copy.copy(polygon_1)
-polygon_copy.dump()
+print "dump polygon_copy\n", polygon_copy.dump()
 
 polygon_1.get_segment(0).get_head().set_point(100, 100)
-polygon_1.dump()
-polygon_copy.dump()
+print "dump polygon_1 after modified\n", polygon_1.dump()
+print "dump polygon_copy after polygon_1 modified", polygon_copy.dump()
 
 # this should be wrapped from c
 def add_polygon(polygon):
@@ -84,11 +84,13 @@ print "points array: ", points_array
 g_cell = gdspy.Cell('polygon')
 points = [(0, 0), (2, 2), (2, 6), (-6, 6), (-6, -6), (-4, -4), (-4, 4), (0, 4)]
 polygon1 = gdspy.Polygon(1, points_array)
+polygon2 = gdspy.Polygon(2, points)
 g_cell.add(polygon1)
+g_cell.add(polygon2)
 
 name = os.path.abspath(os.path.dirname(os.sys.argv[0])) + os.sep + 'sample'
 gdspy.gds_print(name + '.gds', unit = 1.0e-6, precision = 1.0e-9)
 print 'Sample gds file saved: ' + name + '.gds'
 
+polygon_copy.free()
 profiler.end()
-

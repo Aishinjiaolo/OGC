@@ -1,5 +1,10 @@
 #include "segment.h"
 
+void Segment::free() {
+    delete _head;
+    delete _tail;
+}
+
 void Segment::copy(Segment context) {
     double head_x = context.get_head()->get_gx();
     double head_y = context.get_head()->get_gy();

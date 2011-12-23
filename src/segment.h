@@ -5,6 +5,7 @@ class Segment {
         void set_segment(Point *head, Point *tail);
         void dump();
         void copy(Segment context);
+        void free();
 
         Point  *get_head();
         Point  *get_tail();

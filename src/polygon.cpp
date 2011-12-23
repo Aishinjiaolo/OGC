@@ -1,5 +1,14 @@
 #include "polygon.h"
 
+void Polygon::free() {
+    unsigned int segment_number = this->get_segment_number();
+    for (unsigned int i = 0; i < segment_number; ++i) {
+        this->get_segment(i)->free();
+        delete this->get_segment(i);
+    }
+    delete this->_segments;
+}
+
 void Polygon::copy(Polygon context) {
     unsigned int segment_number = context.get_segment_number();
 

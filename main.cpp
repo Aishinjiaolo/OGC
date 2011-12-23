@@ -68,6 +68,7 @@ int main() {
     copy_test.copy(ab);
     printf("copy segment:\n");
     copy_test.dump();
+    copy_test.free();
 
     // form a set of segments
     Segments all;
@@ -119,6 +120,7 @@ int main() {
     // try loop segment without function set
     loop_segment(&polygons);
 
+    polygon3.free();
     profiler.end();
 
     return 0;
