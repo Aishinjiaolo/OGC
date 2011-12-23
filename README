@@ -5,7 +5,9 @@ For segment based geometry learning,
 it will keep updating.
 
 
-Currently containing:
++-----------------------------------------+
+|          Currently Containing           |
++-----------------------------------------+
 
 source code: (./src/)
 'point'   => point.cpp   point.h
@@ -13,10 +15,27 @@ source code: (./src/)
 'polygon' => polygon.cpp polygon.h
 'api'     => api.cpp     api.h
 
-usage demo: (./)
-usage flow => main.cpp
-auto make  => Makefile
+unit test: (./test/)
+'point'   => point_unittest.cc
+'segment' => segment_unittest.cc
+'polygon' => polygon_unittest.cc
 
+swig interface: (./swig/)
+'point'   => point.i
+'segment' => segment.i
+'polygon' => polygon.i
+'api'     => api.i
+
+usage demo: (./)
+c++    usage flow => main.cpp
+python usage flow => run.py
+auto make         => Makefile
+instruction       => README
+
+
++-----------------------------------------+
+|             C++ Utility                 |
++-----------------------------------------+
 
 To make all:
   ./make
@@ -30,6 +49,10 @@ To run:
 To clean:
   ./make clean
 
+
++-----------------------------------------+
+|            Unit Test Utility            |
++-----------------------------------------+
 
 Unit test is run under google test framework.
 
@@ -52,21 +75,29 @@ To clean unit test:
 Some unit test's been put in ./test/ for your reference.
 
 
-Python bundle flow is supportted by SWIG wrapping
++-----------------------------------------+
+|             Python Extension            |
++-----------------------------------------+
+
+Python extensions in c++ is supportted by SWIG wrapping
 
 1. Please go to: http://www.swig.org/
-   and download the latest version of SWIG.
+   and download the install latest version of SWIG.
    (currently, I am using version 2.0.4)
 2. You may modify the run.py in current directory which is
-   supposed to import bundled capi library.
+   supposed to import the c++ module.
 3. You may write out GDSII files to validate your geometry
    in this python flow.
 4. GDSII module is from http://sourceforge.net/projects/gdspy/
 
-To make and run python flow:
-  ./make pyflow
+To make python extension module:
+  ./make pyswig
 
-To clean python flow:
+To run python script:
+  ./run.py
+
+To clean python extension module:
   ./make pyclean
 
 A sample GDSII file: sample.gds will be generated in current directory.
+
