@@ -112,13 +112,13 @@ int main() {
     polygons.append(&polygon3);
 
     // set segment function and loop all polygons set
-    set_segment_function(grow_45_degree);
-    loop_segment(&polygons);
+    ktSetSegmentFunction(grow_45_degree);
+    ktLoopSegment(&polygons);
 
     polygons.dump();
 
     // try loop segment without function set
-    loop_segment(&polygons);
+    ktLoopSegment(&polygons);
 
     polygon3.free();
     profiler.end();

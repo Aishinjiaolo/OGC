@@ -1,5 +1,9 @@
 #include "segment.h"
 
+double Segment::get_segment_property(int kt_spt_index) {
+    return _property[kt_spt_index];
+}
+
 void Segment::free() {
     delete _head;
     delete _tail;
@@ -55,15 +59,15 @@ Point *Segment::get_tail() {
 }
 
 int Segment::get_dir() {
-    return _dir;
+    return _property[KT_SPT_DIRECTION];
 }
 
 double Segment::get_length() {
-    return _length;
+    return _property[KT_SPT_LENGTH];
 }
 
 double Segment::get_angle() {
-    return _angle;
+    return _property[KT_SPT_ANGLE];
 }
 
 void Segment::set_segment(Point *head, Point *tail) {
@@ -75,38 +79,47 @@ void Segment::set_segment(Point *head, Point *tail) {
     bool is_same_point =
         abs(bias_x) <= EPS && abs(bias_y) <= EPS ? true : false;
 
-    _length = is_same_point ? 0 : sqrt(pow(bias_x, 2) + pow(bias_y, 2));
-    _angle  = is_same_point ? 0 : atan(bias_y / bias_x) * 180 / M_PI;
-    if (bias_x < 0) _angle += 180;
-    if (_angle < 0) _angle += 360;
+    double angle, length;
+    length = is_same_point ? 0 : sqrt(pow(bias_x, 2) + pow(bias_y, 2));
+    angle  = is_same_point ? 0 : atan(bias_y / bias_x) * 180 / M_PI;
 
-    int angle = static_cast<int>(_angle);
-    switch(angle) {
+    if (bias_x < 0) angle += HALF_RADIUS;
+    if (angle  < 0) angle += RADIUS;
+    
+    int angle_snap = static_cast<int>(angle);
+    int dir;
+    switch(angle_snap) {
     case 0:
-        _dir = 0;
+        dir = 0;
         break;
     case 45:
-        _dir = 1;
+        dir = 1;
         break;
     case 90:
-        _dir = 2;
+        dir = 2;
         break;
     case 135:
-        _dir = 3;
+        dir = 3;
         break;
     case 180:
-        _dir = 4;
+        dir = 4;
         break;
     case 225:
-        _dir = 5;
+        dir = 5;
         break;
     case 270:
-        _dir = 6;
+        dir = 6;
         break;
     case 315:
-        _dir = 7;
+        dir = 7;
         break;
     default:
-        _dir = 0;
+        dir = 0;
     }
+
+    _property[KT_SPT_GX]         = tail->get_gx();
+    _property[KT_SPT_GY]         = tail->get_gy();
+    _property[KT_SPT_LENGTH]     = length;
+    _property[KT_SPT_ANGLE]      = angle;
+    _property[KT_SPT_DIRECTION]  = dir;
 }

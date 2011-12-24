@@ -14,6 +14,7 @@ class Segment {
 
         double get_length();
         double get_angle();
+        double get_segment_property(int kt_spt_index);
 
     private:
         Point  *_head;
@@ -23,6 +24,8 @@ class Segment {
 
         double _length;
         double _angle;
+
+        double _property[KT_MAX_SPT_SIZE];
 };
 
 class Segments {

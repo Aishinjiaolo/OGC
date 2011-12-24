@@ -1,28 +1,35 @@
 #include "api.h"
 
+double ktGetSegmentProperty(
+        ktInterp *kt, int figure_type, int offset, int kt_spt_index) {
+    return kt->polygon->get_segment(kt->seg_index+offset)->
+        get_segment_property(kt_spt_index);
+}
+
 static void (*segment_function)(ktInterp *kt) = NULL;
 
-void set_segment_function(
+void ktSetSegmentFunction(
         void (*seg_function)(ktInterp *kt)) {
     segment_function = seg_function;
 }
 
-void loop_segment(Polygons *polygons) {
+void ktLoopSegment(Polygons *polygons) {
     if (segment_function == NULL) {
         printf("no segment function set!!\n");
         return;
     }
 
-    for (unsigned int i = 0; i < polygons->size(); i++) {
-        Polygon *polygon = polygons->get_polygon(i);
-        for (unsigned int j = 0; j < polygon->get_segment_number(); j++) {
-            ktInterp kt;
+    ktInterp kt;
+    unsigned int total_polygon_number = polygons->size();
+    for (unsigned int i = 0; i < total_polygon_number; i++) {
+        kt.polygon = polygons->get_polygon(i);
+        unsigned int total_segment_number = kt.polygon->get_segment_number();
+        for (unsigned int j = 0; j < total_segment_number; j++) {
             kt.seg_index = j;
-            kt.polygon   = polygon;
             segment_function(&kt);
         }
     }
-    
+
     segment_function = NULL;
 }
 

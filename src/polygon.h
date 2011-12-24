@@ -6,7 +6,7 @@ class Polygon {
         void dump();
         void copy(Polygon context);
         void free();
-        ~Polygon() {printf("~Polygon()\n");};
+        //~Polygon() {printf("~Polygon()\n");};
 
         //double get_area();
 

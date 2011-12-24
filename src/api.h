@@ -7,9 +7,11 @@ typedef struct ktInterp_struct {
     Polygon *polygon;
 } ktInterp;
 
-void set_segment_function(void (*seg_function)(ktInterp *kt));
+double ktGetSegmentProperty(
+        ktInterp *kt, int figure_type, int offset, int kt_spt_index);
 
-void loop_segment(Polygons *polygons);
+void ktSetSegmentFunction(void (*seg_function)(ktInterp *kt));
+void ktLoopSegment(Polygons *polygons);
 
 class Profiler {
     public:

@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <sys/time.h>
 #include <cmath>
+#include "macro.h"
 
 const double EPS  = 0.000001;
 const double GRID = 0.25;
