@@ -1,7 +1,19 @@
 #include "segment.h"
 
+void Segment::set_segment_property_int(int kt_spt_index, int value) {
+    _property[kt_spt_index] = value;
+}
+
+int Segment::get_segment_property_int(int kt_spt_index) {
+    return _property[kt_spt_index];
+}
+
 double Segment::get_segment_property(int kt_spt_index) {
     return _property[kt_spt_index];
+}
+
+void Segment::set_segment_property(int kt_spt_index, double value) {
+    _property[kt_spt_index] = value;
 }
 
 void Segment::free() {

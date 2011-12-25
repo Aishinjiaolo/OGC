@@ -60,7 +60,9 @@ polygon_1 = polygon.Polygon()
 polygon_1.set_polygon(segments1)
 print "dump polygon_1\n", polygon_1.dump()
 
+print "before init another polygon"
 polygon_copy = polygon.Polygon()
+print "after init another polygon"
 polygon_copy.copy(polygon_1)
 print "dump polygon_copy\n", polygon_copy.dump()
 

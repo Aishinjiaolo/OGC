@@ -1,9 +1,27 @@
 #include "api.h"
 
-double ktGetSegmentProperty(
-        ktInterp *kt, int figure_type, int offset, int kt_spt_index) {
+void ktSetSegmentPropertyInt(ktInterp *kt, int figure_type, int offset,
+        int kt_spt_index, int value) {
+    kt->polygon->get_segment(kt->seg_index+offset)->
+        set_segment_property_int(kt_spt_index, value);
+}
+
+int ktGetSegmentPropertyInt(ktInterp *kt, int figure_type, int offset,
+        int kt_spt_index) {
+    return kt->polygon->get_segment(kt->seg_index+offset)->
+        get_segment_property_int(kt_spt_index);
+}
+
+double ktGetSegmentProperty(ktInterp *kt, int figure_type, int offset,
+        int kt_spt_index) {
     return kt->polygon->get_segment(kt->seg_index+offset)->
         get_segment_property(kt_spt_index);
+}
+
+void ktSetSegmentProperty(ktInterp *kt, int figure_type, int offset,
+        int kt_spt_index, double value) {
+    kt->polygon->get_segment(kt->seg_index+offset)->
+        set_segment_property(kt_spt_index, value);
 }
 
 static void (*segment_function)(ktInterp *kt) = NULL;

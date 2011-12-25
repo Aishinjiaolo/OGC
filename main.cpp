@@ -3,12 +3,13 @@
 // callback segment function
 void grow_45_degree(ktInterp *kt) {
     int i = kt->seg_index;
-    double tail_x = kt->polygon->get_segment(i)->get_tail()->get_gx();
-    double tail_y = kt->polygon->get_segment(i)->get_tail()->get_gy();
+    double tail_x = ktGetSegmentProperty(kt, MAIN_TYPE, CURRENT, KT_SPT_GX);
+    double tail_y = ktGetSegmentProperty(kt, MAIN_TYPE, CURRENT, KT_SPT_GX);
 
     if (tail_x == tail_y) {
         double new_tail_x = tail_x >= 0 ? tail_x + 1 : tail_x - 1;
         double new_tail_y = new_tail_x;
+        // TODO: set segment property && apply correction
         kt->polygon->get_segment(i)->get_tail()
             ->set_point(new_tail_x, new_tail_y);
     }

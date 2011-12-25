@@ -13,6 +13,9 @@ using namespace std;
 
 class Point {
     public:
+        //Point() {printf("Point()\n");};
+        //~Point() {printf("~Point()\n");};
+
         double get_gx();
         double get_gy();
 

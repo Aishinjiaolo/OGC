@@ -7,8 +7,15 @@ typedef struct ktInterp_struct {
     Polygon *polygon;
 } ktInterp;
 
-double ktGetSegmentProperty(
-        ktInterp *kt, int figure_type, int offset, int kt_spt_index);
+double ktGetSegmentProperty(ktInterp *kt, int figure_type, int offset,
+        int kt_spt_index);
+int ktGetSegmentPropertyInt(ktInterp *kt, int figure_type, int offset,
+        int kt_spt_index);
+
+void ktSetSegmentProperty(ktInterp *kt, int figure_type, int offset,
+        int kt_spt_index, double value);
+void ktSetSegmentPropertyInt(ktInterp *kt, int figure_type, int offset,
+        int kt_spt_index, int value);
 
 void ktSetSegmentFunction(void (*seg_function)(ktInterp *kt));
 void ktLoopSegment(Polygons *polygons);
